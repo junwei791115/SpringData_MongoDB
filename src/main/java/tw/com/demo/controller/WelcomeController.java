@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import tw.com.demo.entity.Item;
-import tw.com.demo.entity.Orders;
+import tw.com.demo.entity.Order;
 import tw.com.demo.repository.ItemRepository;
-import tw.com.demo.repository.OrdersRepository;
+import tw.com.demo.repository.OrderRepository;
 
 
 
@@ -18,15 +18,15 @@ import tw.com.demo.repository.OrdersRepository;
 public class WelcomeController {
 	
 	@Autowired
-	private OrdersRepository ordersRepository;
+	private OrderRepository orderRepository;
 	
 	@Autowired
 	private ItemRepository itemRepository;
 
 	@RequestMapping("/")
 	public String welcome(Map<String, Object> model) {
-		Orders orders = ordersRepository.findByItem("iphoneXR");
-		System.out.println("price:"+orders.getPrice());
+		Order order = orderRepository.findByOrderNo("O001");
+		System.out.println("price:"+order.getPrice());
 		List<Item> items = itemRepository.findAll();
 		for (Item item : items) {
 			System.out.println("Item name :" + item.getItemName() + ", price :"+ item.getPrice());
